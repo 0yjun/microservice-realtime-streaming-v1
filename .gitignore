@@ -2,6 +2,7 @@
 /dist
 /chat-service-nest/node_modules
 /config-service
+/discovery-service
 /build
 
 # Logs
