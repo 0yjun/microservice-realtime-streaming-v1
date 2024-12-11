@@ -1,6 +1,7 @@
 # compiled output
 /dist
 /chat-service-nest/node_modules
+/config-service
 /build
 
 # Logs
