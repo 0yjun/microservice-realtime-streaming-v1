@@ -9,7 +9,6 @@ import { SpringCloudConfigService } from './config/spring.cloud.config.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ChatRoomController } from './chat-room/chat-room.controller';
 import { ChatRoomModule } from './chat-room/chat-room.module';
-import { KafkaService } from './kafka/kafka.service';
 import { KafkaProducerService } from './kafka-producer/kafka-producer.service';
 
 @Module({
@@ -38,6 +37,6 @@ import { KafkaProducerService } from './kafka-producer/kafka-producer.service';
     ChatRoomModule,
   ],
   controllers: [AppController, ChatRoomController],
-  providers: [AppService, SpringCloudConfigService, KafkaService, KafkaProducerService],
+  providers: [AppService, SpringCloudConfigService, KafkaProducerService],
 })
 export class AppModule {}
