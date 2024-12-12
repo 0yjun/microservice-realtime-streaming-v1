@@ -6,8 +6,6 @@ import yamlConfigLoader from '@/config/yaml.config.loader';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { SpringCloudConfigService } from './config/spring.cloud.config.service';
-import { AxiosResponse } from 'axios';
-import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -17,24 +15,6 @@ import { MongooseModule } from '@nestjs/mongoose';
       isGlobal: true,
     }),
     HttpModule,
-    MongooseModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: async (
-        configservice: ConfigService,
-        springCloudConfigService: SpringCloudConfigService,
-      ) => {
-        const springCloudConfig: Record<string, any> =
-          await springCloudConfigService.getConfig();
-        const db_url = springCloudConfig
-          .get('spring.datasource.url')
-          ?.ConfigService.get('');
-
-        return {
-          uri: springCloudConfig.get(''),
-        };
-      },
-      inject: [ConfigService, SpringCloudConfigService],
-    }),
   ],
   controllers: [AppController],
   providers: [AppService, SpringCloudConfigService],
