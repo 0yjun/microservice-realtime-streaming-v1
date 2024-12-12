@@ -4,6 +4,7 @@
 /config-service
 /discovery-service
 /build
+/kafka
 
 # Logs
 logs
