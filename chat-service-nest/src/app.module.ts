@@ -15,17 +15,10 @@ import { SpringCloudConfigService } from './config/spring.cloud.config.service';
       isGlobal: true,
     }),
     HttpModule,
+
+    HttpModule,
   ],
   controllers: [AppController],
   providers: [AppService, SpringCloudConfigService],
 })
-export class AppModule implements OnModuleInit {
-  constructor(
-    private springCloudConfigService: SpringCloudConfigService,
-    private httpService: HttpService,
-  ) {}
-  async onModuleInit() {
-    const config = await this.springCloudConfigService.getConfig();
-    console.log(config);
-  }
-}
+export class AppModule {}
