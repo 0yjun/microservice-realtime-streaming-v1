@@ -6,6 +6,10 @@ import yamlConfigLoader from '@/config/yaml.config.loader';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { SpringCloudConfigService } from './config/spring.cloud.config.service';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ChatRoomController } from './chat-room/chat-room.controller';
+import { ChatRoomModule } from './chat-room/chat-room.module';
+import { KafkaProducerService } from './kafka-producer/kafka-producer.service';
 
 @Module({
   imports: [
@@ -15,10 +19,24 @@ import { SpringCloudConfigService } from './config/spring.cloud.config.service';
       isGlobal: true,
     }),
     HttpModule,
-
-    HttpModule,
+    ClientsModule.register([
+      {
+        name: 'chat-service',
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            clientId: 'chat',
+            brokers: ['localhost:9092'],
+          },
+          consumer: {
+            groupId: 'chat-consumer',
+          },
+        },
+      },
+    ]),
+    ChatRoomModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, SpringCloudConfigService],
+  controllers: [AppController, ChatRoomController],
+  providers: [AppService, SpringCloudConfigService, KafkaProducerService],
 })
 export class AppModule {}
