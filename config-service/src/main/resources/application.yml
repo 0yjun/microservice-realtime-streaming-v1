@@ -1,0 +1,25 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  cloud:
+    bus:
+      enabled: true
+    config:
+      server:
+        git:
+          uri: git@github.com:0yjun/microservice-study-secret.git
+        #uri: http://realtime-stream-config/secret
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

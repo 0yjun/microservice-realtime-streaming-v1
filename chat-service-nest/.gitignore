@@ -1,10 +1,7 @@
 # compiled output
 /dist
-/chat-service-nest/node_modules
-/config-service
-/discovery-service
+/node_modules
 /build
-/kafka
 
 # Logs
 logs
