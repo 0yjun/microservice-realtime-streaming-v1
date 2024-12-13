@@ -9,7 +9,7 @@ const clientPort = Math.random();
 const clientHost = configService.get<string>('server.host');
 const clientName = configService.get<string>('CLIENT_NAME');
 
-export const client = new Eureka({
+export const eurekaClient = new Eureka({
   instance: {
     app: 'nodejs-service',
     hostName: 'localhost',
