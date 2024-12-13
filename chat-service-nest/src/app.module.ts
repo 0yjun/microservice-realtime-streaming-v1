@@ -9,6 +9,7 @@ import { SpringCloudConfigService } from './config/spring.cloud.config.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ChatRoomController } from './chat-room/chat-room.controller';
 import { ChatRoomModule } from './chat-room/chat-room.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { ChatRoomModule } from './chat-room/chat-room.module';
         },
       },
     ]),
+    MongooseModule.forRoot('mongodb://localhost:27017'),
     ChatRoomModule,
   ],
   controllers: [AppController, ChatRoomController],
