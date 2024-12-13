@@ -1,0 +1,19 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: apigateway-service
+
+  cloud:
+    config:
+      name: realtime-streaming
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
