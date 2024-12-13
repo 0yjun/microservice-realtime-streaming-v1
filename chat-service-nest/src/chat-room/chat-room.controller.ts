@@ -1,4 +1,4 @@
-import { Controller, Logger, OnModuleInit } from '@nestjs/common';
+import { Controller, Get, Logger, OnModuleInit } from '@nestjs/common';
 import {
   ClientKafka,
   EventPattern,
@@ -10,7 +10,12 @@ import {
 export class ChatRoomController {
   private logger = new Logger(ChatRoomController.name);
 
-  @EventPattern('broadcsast-created')
+  @Get()
+  healthCheck() {
+    return '1';
+  }
+
+  @EventPattern('broadcast-created')
   handleBroadcastCreated(@Payload() message: any) {
     this.logger.log('reseive broadcast-created', message);
   }

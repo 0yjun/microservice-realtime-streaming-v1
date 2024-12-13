@@ -7,13 +7,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { SpringCloudConfigService } from './config/spring.cloud.config.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { ChatRoomController } from './chat-room/chat-room.controller';
-import { ChatRoomModule } from './chat-room/chat-room.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ChatRoomModule } from './chat-room/chat-room.module';
 
 @Module({
   imports: [
     ChatModule,
+    ChatRoomModule,
     ConfigModule.forRoot({
       load: [yamlConfigLoader],
       isGlobal: true,
@@ -34,10 +34,9 @@ import { MongooseModule } from '@nestjs/mongoose';
         },
       },
     ]),
-    MongooseModule.forRoot('mongodb://localhost:27017'),
-    ChatRoomModule,
+    //MongooseModule.forRoot('mongodb://localhost:27017'),
   ],
-  controllers: [AppController, ChatRoomController],
+  controllers: [AppController],
   providers: [AppService, SpringCloudConfigService],
 })
 export class AppModule {}
